@@ -9,6 +9,7 @@ public class XrayMovement : MonoBehaviour
     private Vector2 movementDirection;
 
     CalculatePosition joystickPos;
+    public BoxCollider2D area;
 
     void Start()
     {
@@ -18,12 +19,19 @@ public class XrayMovement : MonoBehaviour
 
     void Update()
     {
-        movementDirection = new Vector2(joystickPos.axisX.x + joystickPos.axisY.x,
-            joystickPos.axisY.y + joystickPos.axisX.y);
+        movementDirection = new Vector2(joystickPos.axisX.x, joystickPos.axisY.y);
     }
 
     void FixedUpdate()
     {
         rb.velocity = movementDirection * movementSpeed;
+
+        // get the current position
+        Vector3 clampedPosition = transform.position;
+        // limit the x and y positions to be between the area's min and max x and y.
+        clampedPosition.x = Mathf.Clamp(clampedPosition.x, area.bounds.min.x, area.bounds.max.x);
+        clampedPosition.y = Mathf.Clamp(clampedPosition.y, area.bounds.min.y, area.bounds.max.y);
+        // apply the clamped position
+        transform.position = clampedPosition;
     }
 }
