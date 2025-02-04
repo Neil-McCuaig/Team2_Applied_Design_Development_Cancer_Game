@@ -77,7 +77,7 @@ public class Dialog : MonoBehaviour
     {
         foreach (char c in lines[index].ToCharArray())
         {
-            audioManager.PlaySFX(audioManager.manGrunt);
+            //audioManager.PlaySFX(audioManager.manGrunt);
             textComponent.text += c;
             yield return new WaitForSeconds(textSpeed);
         }
