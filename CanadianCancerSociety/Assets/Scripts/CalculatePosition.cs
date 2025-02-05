@@ -7,13 +7,26 @@ public class CalculatePosition : MonoBehaviour
     public Vector2 axisY;
     public Vector2 axisX;
 
+    private float upPos;
+    private float downPos;
+    private float rightPos;
+    private float leftPos;
+
+    void Awake()
+    {
+        upPos = transform.localPosition.y + 1f;
+        downPos = transform.localPosition.y - 1f;
+        rightPos = transform.localPosition.x + 1f;
+        leftPos = transform.localPosition.x - 1f;
+    }
+
     void Update()
     {
-        if (transform.localPosition.y >= -1.8f)
+        if (transform.localPosition.y >= upPos)
         {
             axisY = new Vector2(0, 1);
         }
-        else if (transform.localPosition.y <= -3.9f)
+        else if (transform.localPosition.y <= downPos)
         {
             axisY = new Vector2(0, -1);
         }
@@ -22,11 +35,11 @@ public class CalculatePosition : MonoBehaviour
             axisY = Vector2.zero;
         }
 
-        if (transform.localPosition.x >= 7f)
+        if (transform.localPosition.x >= rightPos)
         {
             axisX = new Vector2(1, 0);
         }
-        else if (transform.localPosition.x <= 5.2f)
+        else if (transform.localPosition.x <= leftPos)
         {
             axisX = new Vector2(-1, 0);
         }

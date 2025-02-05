@@ -6,6 +6,7 @@ TagManager:
   tags:
   - GameManager
   - Audio
+  - Target
   layers:
   - Default
   - TransparentFX
