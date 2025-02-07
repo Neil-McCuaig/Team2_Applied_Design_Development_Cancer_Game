@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class XrayMiniGameManager : MonoBehaviour
@@ -47,6 +48,7 @@ public class XrayMiniGameManager : MonoBehaviour
         if (targetFound)
         {
             boxText.text = "You win";
+            Invoke("LoadNext", 1f);
         }
     }
 
@@ -59,5 +61,10 @@ public class XrayMiniGameManager : MonoBehaviour
     void ResetButton()
     {
         buttonPressed = false;
+    }
+
+    void LoadNext()
+    {
+        SceneManager.LoadScene("ImmunotherapyMiniGame");
     }
 }

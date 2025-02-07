@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class CellManager : MonoBehaviour
@@ -30,7 +31,8 @@ public class CellManager : MonoBehaviour
     private bool canSpawnCancerCell = true;  // Track if a cancer cell can be spawned
 
     // The score variable
-    private int score = 0;
+    public int score = 0;
+    public TextMeshProUGUI scoreText;
 
     void Start()
     {
@@ -211,7 +213,6 @@ public class CellManager : MonoBehaviour
         // Add 100 points for each remaining object
         score = remainingObjects * 100;
 
-        // Display the score in the console (can be replaced with a UI element)
-        Debug.Log("Current Score: " + score);
+        scoreText.text = "Score: " + score;
     }
 }
