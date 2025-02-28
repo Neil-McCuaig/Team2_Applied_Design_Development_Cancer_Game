@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class MiniGameDialog : MonoBehaviour
 {
-    [SerializeField, TextArea(3, 10)] public TextMeshProUGUI textComponent;
-    public string[] lines;
+    public TextMeshProUGUI textComponent;
+    [SerializeField, TextArea(3, 10)] public string[] lines;
     public float textSpeed;
 
     private int index;
