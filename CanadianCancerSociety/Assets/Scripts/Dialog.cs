@@ -9,6 +9,7 @@ using Unity.VisualScripting;
 public class Dialog : MonoBehaviour
 {
     public TextMeshProUGUI textComponent;
+    [TextArea]
     public string[] lines;
     public float textSpeed;
 
