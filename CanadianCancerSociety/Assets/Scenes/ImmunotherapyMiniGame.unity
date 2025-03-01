@@ -1156,7 +1156,7 @@ MonoBehaviour:
   healthyCellCount: 15
   cancerCellCount: 3
   immuneCellCount: 1
-  healthyCellSpeed: 0.5
+  healthyCellSpeed: 1
   cancerCellSpeed: 0.005
   immuneCellSpeed: 0.005
   cancerCellDetectionRange: 100
@@ -1207,7 +1207,7 @@ Transform:
   m_GameObject: {fileID: 1189696730}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 6.22, z: 0}
+  m_LocalPosition: {x: 0, y: 6.58, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1624,6 +1624,67 @@ RectTransform:
   m_AnchoredPosition: {x: -25, y: -375}
   m_SizeDelta: {x: -850, y: -850}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &1548247425
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4213487589525850362, guid: 04f8c4f4cd7a4b74ab41ba4ff51ab7da, type: 3}
+      propertyPath: m_Name
+      value: ImmuneCell
+      objectReference: {fileID: 0}
+    - target: {fileID: 4213487589525850362, guid: 04f8c4f4cd7a4b74ab41ba4ff51ab7da, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559440763267825676, guid: 04f8c4f4cd7a4b74ab41ba4ff51ab7da, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.643361
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559440763267825676, guid: 04f8c4f4cd7a4b74ab41ba4ff51ab7da, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.88383514
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559440763267825676, guid: 04f8c4f4cd7a4b74ab41ba4ff51ab7da, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559440763267825676, guid: 04f8c4f4cd7a4b74ab41ba4ff51ab7da, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559440763267825676, guid: 04f8c4f4cd7a4b74ab41ba4ff51ab7da, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559440763267825676, guid: 04f8c4f4cd7a4b74ab41ba4ff51ab7da, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559440763267825676, guid: 04f8c4f4cd7a4b74ab41ba4ff51ab7da, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559440763267825676, guid: 04f8c4f4cd7a4b74ab41ba4ff51ab7da, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559440763267825676, guid: 04f8c4f4cd7a4b74ab41ba4ff51ab7da, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559440763267825676, guid: 04f8c4f4cd7a4b74ab41ba4ff51ab7da, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 04f8c4f4cd7a4b74ab41ba4ff51ab7da, type: 3}
 --- !u!1 &1587432976
 GameObject:
   m_ObjectHideFlags: 0
@@ -2545,3 +2606,4 @@ SceneRoots:
   - {fileID: 1886574432}
   - {fileID: 1819399457}
   - {fileID: 335989031}
+  - {fileID: 1548247425}

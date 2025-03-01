@@ -16,7 +16,7 @@ public class PickUp : MonoBehaviour
         {
             // Destroy this pickup object
             Destroy(gameObject);
-            cellManager.SpawnCell(cellManager.immuneCellPrefab);
+            cellManager.PickupFunction(gameObject.transform);
         }
     }
 }

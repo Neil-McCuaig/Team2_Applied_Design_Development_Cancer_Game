@@ -86,6 +86,12 @@ public class CellManager : MonoBehaviour
         }
     }
 
+    public void PickupFunction(Transform pickupPosition)
+    {
+        GameObject newCell = Instantiate(immuneCellPrefab, pickupPosition.position, Quaternion.identity);
+        immuneCells.Add(newCell);
+    }
+
     void MoveHealthyCells()
     {
         foreach (var healthyCell in healthyCells)
@@ -116,7 +122,8 @@ public class CellManager : MonoBehaviour
                         healthyCells.Remove(targetHealthyCell);  // Remove the healthy cell from the list
                         Destroy(targetHealthyCell);
                         UpdateScore();
-                        SpawnCell(cancerCellPrefab); // Spawn a new cancer cell at random position
+                        GameObject newCell = Instantiate(cancerCellPrefab, cancerCell.transform.position, Quaternion.identity);
+                        cancerCells.Add(newCell);
                         canSpawnCancerCell = false;  // Disable further cancer cell spawn for now
                         StartCoroutine(EnableCancerCellSpawn());  // Wait before enabling spawn again
                     }
@@ -139,7 +146,7 @@ public class CellManager : MonoBehaviour
             // Check if immune cell is near cancer cells to attack
             foreach (var cancerCell in cancerCells)
             {
-                if (Vector2.Distance(immuneCell.transform.position, cancerCell.transform.position) < 1.5f)
+                if (Vector2.Distance(immuneCell.transform.position, cancerCell.transform.position) < 1.9f)
                 {
                     // Destroy cancer cell (immune cell attacks)
                     Destroy(cancerCell);
