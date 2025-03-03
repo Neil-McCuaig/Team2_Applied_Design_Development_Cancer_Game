@@ -130,6 +130,7 @@ public class CellManager : MonoBehaviour
                 }
             }
         }
+        cancerCellCount = cancerCells.Count;
     }
 
     void MoveImmuneCells()
@@ -146,7 +147,7 @@ public class CellManager : MonoBehaviour
             // Check if immune cell is near cancer cells to attack
             foreach (var cancerCell in cancerCells)
             {
-                if (Vector2.Distance(immuneCell.transform.position, cancerCell.transform.position) < 1.9f)
+                if (Vector2.Distance(immuneCell.transform.position, cancerCell.transform.position) < 1.7f)
                 {
                     // Destroy cancer cell (immune cell attacks)
                     Destroy(cancerCell);
@@ -155,6 +156,7 @@ public class CellManager : MonoBehaviour
                 }
             }
         }
+        immuneCellCount = immuneCells.Count;
     }
 
     GameObject GetNearestHealthyCell(GameObject cancerCell)

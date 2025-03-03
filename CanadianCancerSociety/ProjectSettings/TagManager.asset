@@ -8,6 +8,7 @@ TagManager:
   - Audio
   - Target
   - Immune
+  - OutLine
   layers:
   - Default
   - TransparentFX
