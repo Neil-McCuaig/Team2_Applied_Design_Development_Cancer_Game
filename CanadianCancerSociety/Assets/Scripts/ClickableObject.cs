@@ -13,15 +13,18 @@ public class ClickableObject : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
     // Method to handle mouse clicks
-    void OnMouseDown()
+    void OnMouseOver()
     {
-        // Toggle the bool when the object is clicked
-        isClicked = true;
-        // Check if the SpriteRenderer exists
-        if (spriteRenderer != null)
+        if (Input.GetMouseButton(0))
         {
-            // Directly modify the alpha value of the color to 1 (fully opaque)
-            spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 1f);
+            // Toggle the bool when the object is clicked
+            isClicked = true;
+            // Check if the SpriteRenderer exists
+            if (spriteRenderer != null)
+            {
+                // Directly modify the alpha value of the color to 1 (fully opaque)
+                spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 1f);
+            }
         }
     }
 }

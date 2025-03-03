@@ -721,6 +721,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   surgeryProcess: 0
   surgeryFinished: 0
+  surgeryScore: 1500
 --- !u!4 &653375190
 Transform:
   m_ObjectHideFlags: 0
@@ -1397,6 +1398,7 @@ GameObject:
   - component: {fileID: 1470034545}
   - component: {fileID: 1470034544}
   - component: {fileID: 1470034546}
+  - component: {fileID: 1470034547}
   m_Layer: 0
   m_Name: CartoonTumor
   m_TagString: Untagged
@@ -1471,13 +1473,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1470034546
-BoxCollider:
+--- !u!114 &1470034546
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1470034543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f84f342cad3eb948a0ca0960ed2e71e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldownTimer: 1
+--- !u!58 &1470034547
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470034543}
+  m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1486,12 +1503,24 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.7, y: 5.3, z: 0.2}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.059252143, y: 0.0032918453}
+  serializedVersion: 2
+  m_Radius: 1.1193534
 --- !u!1 &1497970852
 GameObject:
   m_ObjectHideFlags: 0

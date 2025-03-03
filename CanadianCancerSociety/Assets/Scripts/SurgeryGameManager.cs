@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class SurgeryGameManager : MonoBehaviour
 {
@@ -8,9 +9,12 @@ public class SurgeryGameManager : MonoBehaviour
     public int surgeryProcess;
     public bool surgeryFinished = false;
 
+    public float surgeryScore = 1500f;
+
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(surgeryScore);
         TrackPositiveBoolObjects();
     }
 
@@ -44,5 +48,14 @@ public class SurgeryGameManager : MonoBehaviour
             surgeryFinished = true;
         }
 
+    }
+
+    public void IncreaseScore(float increaseAmount)
+    {
+        surgeryScore += increaseAmount;
+    }
+    public void DecreaseScore(float decreaseAmount)
+    {
+        surgeryScore -= decreaseAmount;
     }
 }
