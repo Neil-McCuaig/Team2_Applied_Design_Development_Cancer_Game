@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class ScalpelController : MonoBehaviour
 {
+    public Animator anim;
+
+    public GameObject redCurser;
+    public GameObject bloodParticle;
+
     void Awake()
     {
         // Hide the mouse cursor
@@ -15,13 +20,26 @@ public class ScalpelController : MonoBehaviour
         // Get the mouse position in screen space
         Vector3 mousePosition = Input.mousePosition;
 
-        // Convert the mouse position to world space (keeping the z-axis at the same level as the GameObject)
+        // Convert the mouse position to world space 
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
-        // Set the z-position of the GameObject to 0 (or another value if needed for 2D)
+        // Set the z-position of the GameObject to 0 
         mousePosition.z = 0f;
 
         // Move the GameObject to the mouse position
         transform.position = mousePosition;
+
+        if (Input.GetMouseButton(0))
+        {
+            anim.SetBool("isPressing", true);
+            redCurser.SetActive(false);
+            bloodParticle.SetActive(true);
+        }
+        else
+        {
+            anim.SetBool("isPressing", false);
+            redCurser.SetActive(true);
+            bloodParticle.SetActive(false);
+        }
     }
 }

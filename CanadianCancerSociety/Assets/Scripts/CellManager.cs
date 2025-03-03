@@ -17,6 +17,7 @@ public class CellManager : MonoBehaviour
     public float healthyCellSpeed = 2f;
     public float cancerCellSpeed = 3f;
     public float immuneCellSpeed = 5f;
+    public float immuneAttackRange = 2f;
     public float cancerCellDetectionRange = 5f;
 
     public Transform healthyCellSpawn; // The transform defining the area
@@ -29,6 +30,7 @@ public class CellManager : MonoBehaviour
     private List<GameObject> immuneCells = new List<GameObject>();
 
     private bool canSpawnCancerCell = true;  // Track if a cancer cell can be spawned
+    public float cancerAttackCooldown = 0.7f;  
 
     // The score variable
     public int score = 0;
@@ -147,7 +149,7 @@ public class CellManager : MonoBehaviour
             // Check if immune cell is near cancer cells to attack
             foreach (var cancerCell in cancerCells)
             {
-                if (Vector2.Distance(immuneCell.transform.position, cancerCell.transform.position) < 1.7f)
+                if (Vector2.Distance(immuneCell.transform.position, cancerCell.transform.position) < immuneAttackRange)
                 {
                     // Destroy cancer cell (immune cell attacks)
                     Destroy(cancerCell);
@@ -180,7 +182,7 @@ public class CellManager : MonoBehaviour
     // Coroutine to allow spawning of cancer cells again after a short delay
     IEnumerator EnableCancerCellSpawn()
     {
-        yield return new WaitForSeconds(1f);  // Delay for a second before allowing spawn again
+        yield return new WaitForSeconds(cancerAttackCooldown);  // Delay for a second before allowing spawn again
         canSpawnCancerCell = true;
     }
 

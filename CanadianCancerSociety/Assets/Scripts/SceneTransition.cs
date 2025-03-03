@@ -13,6 +13,10 @@ public class SceneTransition : MonoBehaviour
     {
         SceneManager.LoadScene("ImmunotherapyMiniGame");
     }
+    public void PlaySurgery()
+    {
+        SceneManager.LoadScene("SurgeryMiniGame");
+    }
     public void ReturnToMenu()
     {
         SceneManager.LoadScene("MainMenu");

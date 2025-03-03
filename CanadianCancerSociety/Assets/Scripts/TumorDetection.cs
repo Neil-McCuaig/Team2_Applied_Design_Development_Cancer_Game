@@ -9,9 +9,12 @@ public class TumorDetection : MonoBehaviour
 
     SurgeryGameManager gameManager;
 
+    public SpriteRenderer spriteRenderer;
+
     void Start()
     {
         gameManager = FindFirstObjectByType<SurgeryGameManager>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
     // Method to handle mouse clicks
     void OnMouseOver()
@@ -21,6 +24,7 @@ public class TumorDetection : MonoBehaviour
             if (notDamaged)
             {
                 notDamaged = false;
+                spriteRenderer.color = Color.red;
                 gameManager.DecreaseScore(300f);
                 StartCoroutine(DamagedCooldown()); 
             }
@@ -29,7 +33,8 @@ public class TumorDetection : MonoBehaviour
 
     IEnumerator DamagedCooldown()
     {
-        yield return new WaitForSeconds(cooldownTimer);  
+        yield return new WaitForSeconds(cooldownTimer);
+        spriteRenderer.color = new Color(255, 255, 255);
         notDamaged = true;
     }
 }

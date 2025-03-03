@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
@@ -10,11 +11,12 @@ public class SurgeryGameManager : MonoBehaviour
     public bool surgeryFinished = false;
 
     public float surgeryScore = 1500f;
+    public TextMeshProUGUI scoreText;
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(surgeryScore);
+        scoreText.text = "Score: " + surgeryScore;
         TrackPositiveBoolObjects();
     }
 

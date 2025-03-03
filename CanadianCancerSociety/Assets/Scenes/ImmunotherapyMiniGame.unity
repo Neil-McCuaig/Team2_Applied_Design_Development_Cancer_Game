@@ -1158,12 +1158,14 @@ MonoBehaviour:
   immuneCellCount: 1
   healthyCellSpeed: 1
   cancerCellSpeed: 0.005
-  immuneCellSpeed: 0.005
+  immuneCellSpeed: 0.01
+  immuneAttackRange: 2
   cancerCellDetectionRange: 100
   healthyCellSpawn: {fileID: 1219322177}
   cancerCellSpawn: {fileID: 448466044}
   immuneCellSpawn: {fileID: 1729547059}
   spawnRange: 3
+  cancerAttackCooldown: 0.7
   score: 0
   scoreText: {fileID: 441754699}
 --- !u!4 &1067964646
@@ -1374,7 +1376,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 335989030}
         m_TargetAssemblyTypeName: SceneTransition, Assembly-CSharp
-        m_MethodName: ReturnToMenu
+        m_MethodName: PlaySurgery
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1624,67 +1626,6 @@ RectTransform:
   m_AnchoredPosition: {x: -25, y: -375}
   m_SizeDelta: {x: -850, y: -850}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1001 &1548247425
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4213487589525850362, guid: 04f8c4f4cd7a4b74ab41ba4ff51ab7da, type: 3}
-      propertyPath: m_Name
-      value: ImmuneCell
-      objectReference: {fileID: 0}
-    - target: {fileID: 4213487589525850362, guid: 04f8c4f4cd7a4b74ab41ba4ff51ab7da, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5559440763267825676, guid: 04f8c4f4cd7a4b74ab41ba4ff51ab7da, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -8.643361
-      objectReference: {fileID: 0}
-    - target: {fileID: 5559440763267825676, guid: 04f8c4f4cd7a4b74ab41ba4ff51ab7da, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.88383514
-      objectReference: {fileID: 0}
-    - target: {fileID: 5559440763267825676, guid: 04f8c4f4cd7a4b74ab41ba4ff51ab7da, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5559440763267825676, guid: 04f8c4f4cd7a4b74ab41ba4ff51ab7da, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5559440763267825676, guid: 04f8c4f4cd7a4b74ab41ba4ff51ab7da, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5559440763267825676, guid: 04f8c4f4cd7a4b74ab41ba4ff51ab7da, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5559440763267825676, guid: 04f8c4f4cd7a4b74ab41ba4ff51ab7da, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5559440763267825676, guid: 04f8c4f4cd7a4b74ab41ba4ff51ab7da, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5559440763267825676, guid: 04f8c4f4cd7a4b74ab41ba4ff51ab7da, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5559440763267825676, guid: 04f8c4f4cd7a4b74ab41ba4ff51ab7da, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 04f8c4f4cd7a4b74ab41ba4ff51ab7da, type: 3}
 --- !u!1 &1587432976
 GameObject:
   m_ObjectHideFlags: 0
@@ -2210,7 +2151,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Main Menu
+  m_text: Next Minigame
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2237,8 +2178,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 22.47
+  m_fontSizeBase: 22.47
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2273,7 +2214,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -0.8519287, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2606,4 +2547,3 @@ SceneRoots:
   - {fileID: 1886574432}
   - {fileID: 1819399457}
   - {fileID: 335989031}
-  - {fileID: 1548247425}
