@@ -12,7 +12,7 @@ public class MouseCameraFollow : MonoBehaviour
 
     private void Start()
     {
-        offset = new Vector3(0f, 0f, -1f);
+        offset = new Vector3(0f, 0f, -0.1f);
     }
 
     // Update is called once per frame
