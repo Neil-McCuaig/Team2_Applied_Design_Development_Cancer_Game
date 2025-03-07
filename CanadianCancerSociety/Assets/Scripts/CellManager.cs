@@ -11,16 +11,17 @@ public class CellManager : MonoBehaviour
     public GameObject immuneCellPrefab;
 
     public int healthyCellCount = 10;
-    public int cancerCellCount = 5;
+    public int cancerCellCount = 1;
     public int immuneCellCount = 3;
 
-    public float healthyCellSpeed = 2f;
-    public float cancerCellSpeed = 3f;
-    public float immuneCellSpeed = 5f;
+    public float healthyCellSpeed;
+    public float immuneCellSpeed = 0.0027f;
+    public float immuneCellMaxSpeed = 0.005f;
+    public float immuneSpeedIncreaseRate = 0.001f;
     public float immuneAttackRange = 2f;
     public float cancerCellDetectionRange = 5f;
 
-    public Transform healthyCellSpawn; // The transform defining the area
+    public Transform healthyCellSpawn; 
     public Transform cancerCellSpawn;
     public Transform immuneCellSpawn;
     public float spawnRange;
@@ -29,25 +30,52 @@ public class CellManager : MonoBehaviour
     private List<GameObject> cancerCells = new List<GameObject>();
     private List<GameObject> immuneCells = new List<GameObject>();
 
-    private bool canSpawnCancerCell = true;  // Track if a cancer cell can be spawned
-    public float cancerAttackCooldown = 0.7f;  
+    private bool canSpawnCancerCell = true;
+    public float cancerAttackCooldown = 0.2f;
+    public float cancerAttackMaxCooldown = 0.7f;
+    public float cancerAttackIncreaseRate = 0.1f;
 
-    // The score variable
     public int score = 0;
     public TextMeshProUGUI scoreText;
+    
+    public Transform spawnPoint1;
+    public Transform spawnPoint2;
+    public int numOfWaves;
+    public float spawnInterval = 2f; 
+    public float waveInterval = 7f;
+    private bool useSpawnPoint1 = true; 
+    private bool finishWave = false;
+
+    public int wavesUntilCellCount;
+    public float cancerCellSpeed = 3f; 
+    public float maxCancerSpeed = 3f;       
+    public float cancerSpeedIncreaseRate = 0.2f; 
+
+    public int currentWave = 1;
+    public int maxWave;
+    public TextMeshProUGUI waveText;
+
+    public int pickUpTotal;
+    public int pickUpMax;
+    public List<Transform> spawnPoints;
+    public GameObject pickUpPrefab;
+    public float pickUpDropInterval = 2f;
+    public int maxPickUp = 2;
+    public int wavesUntilPickUp = -2;
+
+    public GameObject winScreen;
+    MiniGameDialog dialog;
 
     void Start()
     {
+        waveText.text = "Wave: " + currentWave + "/10";
+        winScreen.SetActive(false);
+        dialog = FindAnyObjectByType<MiniGameDialog>();
+       
         // Spawn Healthy Cells
         for (int i = 0; i < healthyCellCount; i++)
         {
             SpawnCell(healthyCellPrefab);
-        }
-
-        // Spawn Cancer Cells
-        for (int i = 0; i < cancerCellCount; i++)
-        {
-            SpawnCell(cancerCellPrefab);
         }
 
         // Spawn Immune Cells
@@ -56,14 +84,121 @@ public class CellManager : MonoBehaviour
             SpawnCell(immuneCellPrefab);
         }
 
-        UpdateScore();
+        UpdateUI();
+        // Start spawning objects in a coroutine
+        StartCoroutine(SpawnWaves());
+        StartCoroutine(SpawnPickUp());
+    }
+    IEnumerator SpawnWaves()
+    {
+        // Continuously spawn objects at intervals
+        while (numOfWaves > 0)
+        {
+            // Alternate spawn point
+            Transform currentSpawnPoint = useSpawnPoint1 ? spawnPoint1 : spawnPoint2;
+
+            // Instantiate each object in the list at the current spawn point
+            for (int i = 0; i < cancerCellCount; i++)
+            {
+                GameObject newCell = Instantiate(cancerCellPrefab, currentSpawnPoint.position, Quaternion.identity);
+                cancerCells.Add(newCell);
+            }
+      
+            // Toggle spawn point for next time
+            useSpawnPoint1 = !useSpawnPoint1;
+            numOfWaves--;
+
+            // Wait for the next spawn interval
+            yield return new WaitForSeconds(spawnInterval);
+        }
+        finishWave = true;
+    }
+    IEnumerator SpawnPickUp()
+    {
+        // Continuously spawn objects at intervals
+        while (wavesUntilPickUp > 0)
+        {
+            for (int i = 0; i < maxPickUp; i++)
+            {
+                    int randomIndex = Random.Range(0, spawnPoints.Count);
+                    Transform randomSpawnPoint = spawnPoints[randomIndex];
+
+                    Instantiate(pickUpPrefab, randomSpawnPoint.position, randomSpawnPoint.rotation);
+            }
+            wavesUntilPickUp--;
+            // Wait for the next spawn interval
+            yield return new WaitForSeconds(pickUpDropInterval);
+        }
+    }
+
+    void EndWave()
+    {
+        currentWave += 1;
+        waveText.text = "Wave: " + currentWave + "/10";
+        dialog.TriggerDialog();
+        numOfWaves = (currentWave + 2);
+
+        // Increase the speed by the rate
+        cancerCellSpeed += cancerSpeedIncreaseRate;
+        if (cancerCellSpeed > maxCancerSpeed)
+        {
+            cancerCellSpeed = maxCancerSpeed;
+        }
+
+        cancerAttackCooldown -= cancerAttackIncreaseRate;
+        if (cancerAttackCooldown < cancerAttackMaxCooldown)
+        {
+            cancerAttackCooldown = cancerAttackMaxCooldown;
+        }
+
+        wavesUntilCellCount += 1;
+        if (wavesUntilCellCount >= 3)
+        {
+            cancerCellCount++;
+            wavesUntilCellCount = 0;
+        }
+
+        wavesUntilPickUp += 1;
+        if (wavesUntilPickUp > 1)
+        {
+            wavesUntilPickUp = 1;
+            
+        }
+        if (currentWave >= 4)
+        {
+            maxPickUp = 2;
+        }
+        else if (currentWave >= 6)
+        {
+            maxPickUp = 3;
+        }
+        StartCoroutine(SpawnNewWave());
+    }
+    IEnumerator SpawnNewWave()
+    {
+        yield return new WaitForSeconds(waveInterval);
+        StartCoroutine(SpawnWaves());
+        StartCoroutine(SpawnPickUp());
     }
 
     void Update()
     {
-        MoveHealthyCells();
-        MoveCancerCells();
-        MoveImmuneCells();
+        if (currentWave < 11)
+        {
+            MoveHealthyCells();
+            MoveCancerCells();
+            MoveImmuneCells();
+
+            if (finishWave && cancerCells.Count == 0)
+            {
+                finishWave = false;
+                EndWave();
+            }
+        }
+        else if (currentWave >= 11)
+        { 
+            winScreen.SetActive(true);
+        }
     }
 
     public void SpawnCell(GameObject cellPrefab)
@@ -73,12 +208,6 @@ public class CellManager : MonoBehaviour
             Vector3 randomPosition = GetHealthyCellRandomPosition();
             GameObject newCell = Instantiate(cellPrefab, randomPosition, Quaternion.identity);
             healthyCells.Add(newCell);
-        }
-        else if (cellPrefab == cancerCellPrefab)
-        {
-            Vector3 randomPosition = GetCancerCellRandomPosition();
-            GameObject newCell = Instantiate(cellPrefab, randomPosition, Quaternion.identity);
-            cancerCells.Add(newCell);
         }
         else if (cellPrefab == immuneCellPrefab)
         {
@@ -90,8 +219,19 @@ public class CellManager : MonoBehaviour
 
     public void PickupFunction(Transform pickupPosition)
     {
-        GameObject newCell = Instantiate(immuneCellPrefab, pickupPosition.position, Quaternion.identity);
-        immuneCells.Add(newCell);
+        immuneCellSpeed += immuneSpeedIncreaseRate;
+        if (immuneCellSpeed > immuneCellMaxSpeed)
+        {
+            immuneCellSpeed = immuneCellMaxSpeed;
+        }
+
+        pickUpTotal += 1;
+        if (pickUpTotal >= pickUpMax)
+        {
+            GameObject newCell = Instantiate(immuneCellPrefab, pickupPosition.position, Quaternion.identity);
+            immuneCells.Add(newCell);
+            pickUpTotal = 0;
+        }
     }
 
     void MoveHealthyCells()
@@ -123,7 +263,8 @@ public class CellManager : MonoBehaviour
                         // Turn healthy cell into cancer cell
                         healthyCells.Remove(targetHealthyCell);  // Remove the healthy cell from the list
                         Destroy(targetHealthyCell);
-                        UpdateScore();
+                        score -= 10;
+                        UpdateUI();
                         GameObject newCell = Instantiate(cancerCellPrefab, cancerCell.transform.position, Quaternion.identity);
                         cancerCells.Add(newCell);
                         canSpawnCancerCell = false;  // Disable further cancer cell spawn for now
@@ -132,7 +273,6 @@ public class CellManager : MonoBehaviour
                 }
             }
         }
-        cancerCellCount = cancerCells.Count;
     }
 
     void MoveImmuneCells()
@@ -151,6 +291,8 @@ public class CellManager : MonoBehaviour
             {
                 if (Vector2.Distance(immuneCell.transform.position, cancerCell.transform.position) < immuneAttackRange)
                 {
+                    score += 100;
+                    UpdateUI();
                     // Destroy cancer cell (immune cell attacks)
                     Destroy(cancerCell);
                     cancerCells.Remove(cancerCell);
@@ -196,16 +338,6 @@ public class CellManager : MonoBehaviour
         return new Vector3(randomX, randomY, 0f); // Z is set to 0 for 2D
     }
 
-    Vector3 GetCancerCellRandomPosition()
-    {
-        // Random position within the bounds relative to the areaTransform
-        float randomX = Random.Range(cancerCellSpawn.position.x - spawnRange, cancerCellSpawn.position.x + spawnRange);
-        float randomY = Random.Range(cancerCellSpawn.position.y - spawnRange, cancerCellSpawn.position.y + spawnRange);
-
-        // Return a Vector3 with only X and Y for 2D
-        return new Vector3(randomX, randomY, 0f); // Z is set to 0 for 2D
-    }
-
     Vector3 GetImmuneCellRandomPosition()
     {
         // Random position within the bounds relative to the areaTransform
@@ -216,14 +348,8 @@ public class CellManager : MonoBehaviour
         return new Vector3(randomX, randomY, 0f); // Z is set to 0 for 2D
     }
 
-    void UpdateScore()
+    void UpdateUI()
     {
-        // Count the remaining game objects
-        int remainingObjects = healthyCells.Count;
-
-        // Add 100 points for each remaining object
-        score = remainingObjects * 100;
-
         scoreText.text = "Score: " + score;
     }
 }

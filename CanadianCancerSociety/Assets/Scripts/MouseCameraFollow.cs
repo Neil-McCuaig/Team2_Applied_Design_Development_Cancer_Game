@@ -10,6 +10,8 @@ public class MouseCameraFollow : MonoBehaviour
 
     private Vector3 target;
 
+    public GameObject cam;
+
     private void Start()
     {
         offset = new Vector3(0f, 0f, -0.1f);
@@ -20,9 +22,6 @@ public class MouseCameraFollow : MonoBehaviour
     {
         target = Input.mousePosition;
         target = Camera.main.ScreenToWorldPoint(target);
-        target.z = 0f;
-
-        Vector3 targetPosition = target + offset;
-        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
+        transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, smoothTime);
     }
 }
