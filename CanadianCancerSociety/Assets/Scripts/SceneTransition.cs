@@ -22,6 +22,10 @@ public class SceneTransition : MonoBehaviour
     {
         SceneManager.LoadScene("SurgeryMiniGame");
     }
+    public void AfterCredits()
+    {
+        SceneManager.LoadScene("EndOfDemo");
+    }
     public void ReturnToMenu()
     {
         SceneManager.LoadScene("MainMenu");

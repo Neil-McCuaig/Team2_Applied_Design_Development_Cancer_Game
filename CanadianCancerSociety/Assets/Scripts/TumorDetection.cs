@@ -25,7 +25,7 @@ public class TumorDetection : MonoBehaviour
             {
                 notDamaged = false;
                 spriteRenderer.color = Color.red;
-                gameManager.DecreaseScore(300f);
+                gameManager.DecreaseScore(70f);
                 StartCoroutine(DamagedCooldown()); 
             }
         }

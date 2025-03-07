@@ -64,12 +64,14 @@ public class CellManager : MonoBehaviour
     public int wavesUntilPickUp = -2;
 
     public GameObject winScreen;
+    public GameObject loseScreen;
     MiniGameDialog dialog;
 
     void Start()
     {
         waveText.text = "Wave: " + currentWave + "/10";
         winScreen.SetActive(false);
+        loseScreen.SetActive(false);
         dialog = FindAnyObjectByType<MiniGameDialog>();
        
         // Spawn Healthy Cells
@@ -168,7 +170,7 @@ public class CellManager : MonoBehaviour
         {
             maxPickUp = 2;
         }
-        else if (currentWave >= 6)
+        else if (currentWave == 6)
         {
             maxPickUp = 3;
         }
@@ -198,6 +200,11 @@ public class CellManager : MonoBehaviour
         else if (currentWave >= 11)
         { 
             winScreen.SetActive(true);
+        }
+        Debug.Log(healthyCells.Count);
+        if (healthyCells.Count == 0)
+        {
+            loseScreen.SetActive(true);
         }
     }
 
@@ -252,7 +259,7 @@ public class CellManager : MonoBehaviour
             {
                 // Move towards the healthy cell
                 Vector2 direction = (targetHealthyCell.transform.position - cancerCell.transform.position).normalized;
-                cancerCell.transform.position = Vector3.MoveTowards(cancerCell.transform.position, targetHealthyCell.transform.position, cancerCellSpeed);
+                cancerCell.transform.position = Vector3.MoveTowards(cancerCell.transform.position, targetHealthyCell.transform.position, cancerCellSpeed * Time.deltaTime);
 
                 // Turn healthy cell into cancer cell if close enough
                 if (Vector2.Distance(cancerCell.transform.position, targetHealthyCell.transform.position) < 1.7f)
@@ -284,7 +291,7 @@ public class CellManager : MonoBehaviour
         foreach (var immuneCell in immuneCells)
         {
             Vector3 direction = (mousePosition - immuneCell.transform.position).normalized;
-            immuneCell.transform.position = Vector3.MoveTowards(immuneCell.transform.position, mousePosition, immuneCellSpeed);
+            immuneCell.transform.position = Vector3.MoveTowards(immuneCell.transform.position, mousePosition, immuneCellSpeed * Time.deltaTime);
 
             // Check if immune cell is near cancer cells to attack
             foreach (var cancerCell in cancerCells)

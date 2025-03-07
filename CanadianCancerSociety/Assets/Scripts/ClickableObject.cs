@@ -21,7 +21,8 @@ public class ClickableObject : MonoBehaviour
         {
             if (!isClicked) 
             {
-                gameManager.IncreaseScore(5f);
+                gameManager.IncreaseScore(10f);
+                gameManager.CallForDialog();
             }
             // Toggle the bool when the object is clicked
             isClicked = true;

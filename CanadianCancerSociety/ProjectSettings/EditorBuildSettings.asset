@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SurgeryMiniGame.unity
     guid: 8edf5e790be42bf4a9138754e5168888
+  - enabled: 1
+    path: Assets/Scenes/EndOfDemo.unity
+    guid: 39b52a9322883f14496565c3e7b20245
   m_configObjects: {}

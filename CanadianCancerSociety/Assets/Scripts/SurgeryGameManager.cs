@@ -13,6 +13,15 @@ public class SurgeryGameManager : MonoBehaviour
     public float surgeryScore = 1500f;
     public TextMeshProUGUI scoreText;
 
+    MiniGameDialog dialog;
+    public GameObject winScreen;
+
+    void Start()
+    {
+        dialog = FindAnyObjectByType<MiniGameDialog>();
+        winScreen.SetActive(false);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -45,11 +54,37 @@ public class SurgeryGameManager : MonoBehaviour
         {
             if(!surgeryFinished)
             {
-                Debug.Log("You Win");
+                winScreen.SetActive(true);
             }
             surgeryFinished = true;
         }
-
+    }
+    public void CallForDialog()
+    {
+        if (surgeryProcess == 10)
+        {
+            dialog.TriggerDialog();
+        }
+        else if (surgeryProcess == 20)
+        {
+            dialog.TriggerDialog();
+        }
+        else if (surgeryProcess == 30)
+        {
+            dialog.TriggerDialog();
+        }
+        else if (surgeryProcess == 40)
+        {
+            dialog.TriggerDialog();
+        }
+        else if (surgeryProcess == 50)
+        {
+            dialog.TriggerDialog();
+        }
+        else if (surgeryProcess == 60)
+        {
+            dialog.TriggerDialog();
+        }
     }
 
     public void IncreaseScore(float increaseAmount)
