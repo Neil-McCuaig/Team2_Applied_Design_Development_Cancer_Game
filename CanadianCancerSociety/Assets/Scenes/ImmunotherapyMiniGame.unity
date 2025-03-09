@@ -2606,9 +2606,9 @@ MonoBehaviour:
   cancerCellCount: 1
   immuneCellCount: 1
   healthyCellSpeed: 1
-  immuneCellSpeed: 1.3
-  immuneCellMaxSpeed: 2
-  immuneSpeedIncreaseRate: 0.05
+  immuneCellSpeed: 1.5
+  immuneCellMaxSpeed: 3.2
+  immuneSpeedIncreaseRate: 0.1
   immuneAttackRange: 2
   cancerCellDetectionRange: 100
   healthyCellSpawn: {fileID: 1219322177}
@@ -2626,9 +2626,9 @@ MonoBehaviour:
   spawnInterval: 3
   waveInterval: 4
   wavesUntilCellCount: 0
-  cancerCellSpeed: 0.4
-  maxCancerSpeed: 0.85
-  cancerSpeedIncreaseRate: 0.05
+  cancerCellSpeed: 0.6
+  maxCancerSpeed: 2.05
+  cancerSpeedIncreaseRate: 0.1
   currentWave: 1
   maxWave: 0
   waveText: {fileID: 1079644061}
