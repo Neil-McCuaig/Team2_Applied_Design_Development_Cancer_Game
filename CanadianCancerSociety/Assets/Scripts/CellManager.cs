@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class CellManager : MonoBehaviour
 {
+
+    //Defaults: Immune cell speed 1.3, max speed 2, increases by 0.05. Cancer cell speed 0.4, max speed 0.85, increases by 0.05
     public GameObject healthyCellPrefab;
     public GameObject cancerCellPrefab;
     public GameObject immuneCellPrefab;

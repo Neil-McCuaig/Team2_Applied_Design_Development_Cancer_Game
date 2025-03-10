@@ -2606,8 +2606,8 @@ MonoBehaviour:
   cancerCellCount: 1
   immuneCellCount: 1
   healthyCellSpeed: 1
-  immuneCellSpeed: 1.3
-  immuneCellMaxSpeed: 2
+  immuneCellSpeed: 1.5
+  immuneCellMaxSpeed: 2.2
   immuneSpeedIncreaseRate: 0.05
   immuneAttackRange: 2
   cancerCellDetectionRange: 100
@@ -2626,8 +2626,8 @@ MonoBehaviour:
   spawnInterval: 3
   waveInterval: 4
   wavesUntilCellCount: 0
-  cancerCellSpeed: 0.4
-  maxCancerSpeed: 0.85
+  cancerCellSpeed: 0.6
+  maxCancerSpeed: 1.05
   cancerSpeedIncreaseRate: 0.05
   currentWave: 1
   maxWave: 0
