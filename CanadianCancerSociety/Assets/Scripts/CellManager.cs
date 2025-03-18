@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class CellManager : MonoBehaviour
 {
-
     //Defaults: Immune cell speed 1.3, max speed 2, increases by 0.05. Cancer cell speed 0.4, max speed 0.85, increases by 0.05
     public GameObject healthyCellPrefab;
     public GameObject cancerCellPrefab;
@@ -71,7 +70,7 @@ public class CellManager : MonoBehaviour
 
     void Start()
     {
-        waveText.text = "Wave: " + currentWave + "/10";
+        waveText.text = "Wave: " + currentWave + "/8";
         winScreen.SetActive(false);
         loseScreen.SetActive(false);
         dialog = FindAnyObjectByType<MiniGameDialog>();
@@ -138,7 +137,7 @@ public class CellManager : MonoBehaviour
     void EndWave()
     {
         currentWave += 1;
-        waveText.text = "Wave: " + currentWave + "/10";
+        waveText.text = "Wave: " + currentWave + "/8";
         dialog.TriggerDialog();
         numOfWaves = (currentWave + 2);
 
@@ -187,7 +186,7 @@ public class CellManager : MonoBehaviour
 
     void Update()
     {
-        if (currentWave < 11)
+        if (currentWave < 9)
         {
             MoveHealthyCells();
             MoveCancerCells();
@@ -199,7 +198,7 @@ public class CellManager : MonoBehaviour
                 EndWave();
             }
         }
-        else if (currentWave >= 11)
+        else if (currentWave >= 9)
         { 
             winScreen.SetActive(true);
         }
