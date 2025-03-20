@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 83f4a8af97e269d40917ed7e7b625c62
+guid: df318df1654da6647be8263860e311f7
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,43 +123,43 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: among-us-mouse-character-pack_0
+      name: image-removebg-preview (69)_0
       rect:
         serializedVersion: 2
-        x: 99
-        y: 53
-        width: 176
-        height: 220
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 91
+        y: 51
+        width: 179
+        height: 224
+      alignment: 9
+      pivot: {x: 0.051003482, y: 0.97375053}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6df94ab89f38a854983645598df5c2d9
-      internalID: 1790233234
+      spriteID: 1e578d35d1286da4ab4ecde5a5eb2a56
+      internalID: -956042408
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: among-us-mouse-character-pack_1
+      name: image-removebg-preview (69)_1
       rect:
         serializedVersion: 2
-        x: 350
-        y: 25
-        width: 232
-        height: 276
+        x: 363
+        y: 22
+        width: 207
+        height: 279
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 56ed135e7d345c6479292fbbf9d2adb9
-      internalID: 1309962826
+      spriteID: a568a4718205ab24091aeab838c11009
+      internalID: 486317817
       vertices: []
       indices: 
       edges: []
@@ -175,8 +175,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      among-us-mouse-character-pack_0: 1790233234
-      among-us-mouse-character-pack_1: 1309962826
+      image-removebg-preview (69)_0: -956042408
+      image-removebg-preview (69)_1: 486317817
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

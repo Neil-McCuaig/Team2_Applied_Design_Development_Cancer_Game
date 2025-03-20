@@ -27,9 +27,9 @@ public class CellManager : MonoBehaviour
     public Transform immuneCellSpawn;
     public float spawnRange;
 
-    private List<GameObject> healthyCells = new List<GameObject>();
-    private List<GameObject> cancerCells = new List<GameObject>();
-    private List<GameObject> immuneCells = new List<GameObject>();
+    public List<GameObject> healthyCells = new List<GameObject>();
+    public List<GameObject> cancerCells = new List<GameObject>();
+    public List<GameObject> immuneCells = new List<GameObject>();
 
     private bool canSpawnCancerCell = true;
     public float cancerAttackCooldown = 0.2f;
@@ -202,7 +202,6 @@ public class CellManager : MonoBehaviour
         { 
             winScreen.SetActive(true);
         }
-        Debug.Log(healthyCells.Count);
         if (healthyCells.Count == 0)
         {
             loseScreen.SetActive(true);
