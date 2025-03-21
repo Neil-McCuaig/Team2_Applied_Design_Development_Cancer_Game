@@ -14,10 +14,10 @@ public class CalculatePosition : MonoBehaviour
 
     void Awake()
     {
-        upPos = transform.localPosition.y + 1f;
-        downPos = transform.localPosition.y - 1f;
-        rightPos = transform.localPosition.x + 1f;
-        leftPos = transform.localPosition.x - 1f;
+        upPos = transform.localPosition.y + 0.3f;
+        downPos = transform.localPosition.y - 0.3f;
+        rightPos = transform.localPosition.x + 0.3f;
+        leftPos = transform.localPosition.x - 0.3f;
     }
 
     void Update()

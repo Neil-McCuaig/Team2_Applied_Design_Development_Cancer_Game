@@ -10,6 +10,8 @@ public class ClickDragging : MonoBehaviour
 
     public BoxCollider2D area;
 
+    public GameObject tutorialIntro;
+
     void Start()
     {
         orginalPosition = transform.position;
@@ -38,6 +40,8 @@ public class ClickDragging : MonoBehaviour
     {
         offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
         dragging = true;
+
+        tutorialIntro.SetActive(false);
     }
 
     private void OnMouseUp() 

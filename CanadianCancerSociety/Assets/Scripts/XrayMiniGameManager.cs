@@ -43,7 +43,10 @@ public class XrayMiniGameManager : MonoBehaviour
         if (isInTriggerZone && buttonPressed)
         {
             targetFound = true; // Set the bool to true
-
+        }
+        else if (buttonPressed) 
+        {
+            boxText.text = "No Cancer detected";
         }
         if (targetFound)
         {
