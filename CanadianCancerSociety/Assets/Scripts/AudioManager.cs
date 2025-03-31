@@ -9,11 +9,14 @@ public class AudioManager : MonoBehaviour
     [Header("----------- Audio Source -----------")]
     [SerializeField] AudioSource musicSource;
     [SerializeField] AudioSource SFXSource;
+    [SerializeField] AudioSource SFXSourceTwo; 
 
     [Header("----------- Audio Clips -----------")]
     public AudioClip backgroundMusic;
     public AudioClip popSound;
     public AudioClip manGrunt;
+    public AudioClip penLong;
+    public AudioClip walking;
 
 
     private void Awake()
@@ -42,5 +45,9 @@ public class AudioManager : MonoBehaviour
     public void PlaySFX(AudioClip clip)
     {
         SFXSource.PlayOneShot(clip);
+    }
+    public void PlaySFX2(AudioClip clip)
+    {
+        SFXSourceTwo.PlayOneShot(clip);
     }
 }

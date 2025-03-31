@@ -9,6 +9,8 @@ public class MiniGameDialog : MonoBehaviour
     [SerializeField, TextArea(3, 10)] public string[] lines;
     public float textSpeed;
     private int index;
+    public AudioSource audioSource;
+    public AudioClip clip;
 
     public bool triggerDialog = false;
 
@@ -26,10 +28,12 @@ public class MiniGameDialog : MonoBehaviour
     {
         if (triggerDialog)
         {
+            audioSource.Play();
             triggerDialog = false;
             if (textComponent.text == lines[index])
             {
                 NextLine();
+                audioSource.Play();
             }
             else
             {
