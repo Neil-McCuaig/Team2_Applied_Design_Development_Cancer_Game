@@ -8,13 +8,15 @@ public class PlayerMovement : MonoBehaviour
     private float moveInput;      
     private Rigidbody2D rb;       
     private SpriteRenderer spriteRenderer;
+    public AudioSource audioSource;
+    public AudioClip clip;
 
     public bool inDialog = false;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>(); 
     }
 
     void Update()
@@ -29,6 +31,27 @@ public class PlayerMovement : MonoBehaviour
             {
                 spriteRenderer.flipX = moveInput < 0;
             }
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                audioSource.Play();
+            }
+            if (Input.GetKeyUp(KeyCode.RightArrow))
+            {
+                audioSource.Stop();
+            }
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                audioSource.Play();
+            }
+            if (Input.GetKeyUp(KeyCode.LeftArrow))
+            {
+                audioSource.Stop();
+            }
         }
+    }
+    public void PlaySoundEffect()
+    {
+        audioSource.Play();
+        AudioClip clip = audioSource.clip;
     }
 }
