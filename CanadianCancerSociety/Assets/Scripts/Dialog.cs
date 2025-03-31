@@ -25,8 +25,7 @@ public class Dialog : MonoBehaviour
     public PlayerMovement player;
 
     AudioManager audioManager;
-    public AudioSource audioSource;
-    public AudioClip clip;
+    
 
     private void Start()
     {
@@ -39,7 +38,7 @@ public class Dialog : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && isSpeaking)
         {
-            audioSource.Play();
+            
             if (textComponent.text == lines[index])
             {
                 NextLine();
