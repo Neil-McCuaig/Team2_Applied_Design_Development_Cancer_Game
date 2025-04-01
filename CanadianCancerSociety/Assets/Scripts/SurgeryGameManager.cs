@@ -16,6 +16,9 @@ public class SurgeryGameManager : MonoBehaviour
     MiniGameDialog dialog;
     public GameObject winScreen;
 
+    public TextMeshProUGUI timerText;
+    private float currentTime = 0;
+
     void Start()
     {
         dialog = FindAnyObjectByType<MiniGameDialog>();
@@ -25,6 +28,11 @@ public class SurgeryGameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        currentTime += Time.deltaTime;
+        int minutes = Mathf.FloorToInt(currentTime / 60);
+        int seconds = Mathf.FloorToInt(currentTime % 60);
+        timerText.text = ("Time: " + string.Format("{0:00}:{1:00}", minutes, seconds));
+
         scoreText.text = "Score: " + surgeryScore;
         TrackPositiveBoolObjects();
     }

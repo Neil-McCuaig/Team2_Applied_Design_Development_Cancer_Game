@@ -8,12 +8,14 @@ public class TumorDetection : MonoBehaviour
     public float cooldownTimer = 1f;
 
     SurgeryGameManager gameManager;
+    ScreenShake screenShake;
 
     public SpriteRenderer spriteRenderer;
 
     void Start()
     {
         gameManager = FindFirstObjectByType<SurgeryGameManager>();
+        screenShake = FindAnyObjectByType<ScreenShake>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
     // Method to handle mouse clicks
@@ -23,6 +25,7 @@ public class TumorDetection : MonoBehaviour
         {
             if (notDamaged)
             {
+                screenShake.TriggerScreenShake();
                 notDamaged = false;
                 spriteRenderer.color = Color.red;
                 gameManager.DecreaseScore(70f);
