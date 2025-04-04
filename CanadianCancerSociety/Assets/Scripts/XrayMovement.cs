@@ -10,9 +10,11 @@ public class XrayMovement : MonoBehaviour
 
     CalculatePosition joystickPos;
     public BoxCollider2D area;
-
+    public AudioSource audioSource;
+    public AudioClip clip;
     void Start()
     {
+        audioSource.Play();
         rb = GetComponent<Rigidbody2D>();  
         joystickPos = FindObjectOfType<CalculatePosition>();
     }

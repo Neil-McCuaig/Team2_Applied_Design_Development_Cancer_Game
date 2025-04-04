@@ -9,6 +9,9 @@ public class XrayMiniGameManager : MonoBehaviour
 {
     public bool targetFound = false;
     public TextMeshProUGUI boxText;
+    public AudioSource audioSource;
+    public AudioSource audioSource2;
+    public AudioClip Clip;
 
     private bool buttonPressed = false;
     private bool isInTriggerZone = false;
@@ -46,10 +49,12 @@ public class XrayMiniGameManager : MonoBehaviour
         }
         else if (buttonPressed) 
         {
+            audioSource.Play();
             boxText.text = "No Cancer detected";
         }
         if (targetFound)
         {
+            audioSource2.Play();
             boxText.text = "You win";
             Invoke("LoadNext", 1f);
         }
