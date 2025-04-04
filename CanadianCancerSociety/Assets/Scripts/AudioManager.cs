@@ -9,7 +9,6 @@ public class AudioManager : MonoBehaviour
     [Header("----------- Audio Source -----------")]
     [SerializeField] AudioSource musicSource;
     [SerializeField] AudioSource SFXSource;
-    [SerializeField] AudioSource SFXSourceTwo; 
 
     [Header("----------- Audio Clips -----------")]
     public AudioClip backgroundMusic;
@@ -17,6 +16,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip manGrunt;
     public AudioClip penLong;
     public AudioClip walking;
+    public AudioClip Xray;
+    public AudioClip incorrect;
 
 
     private void Awake()
@@ -46,8 +47,9 @@ public class AudioManager : MonoBehaviour
     {
         SFXSource.PlayOneShot(clip);
     }
-    public void PlaySFX2(AudioClip clip)
+
+    public void StopMusic()
     {
-        SFXSourceTwo.PlayOneShot(clip);
+        SFXSource.Stop();
     }
 }

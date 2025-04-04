@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 public class Dialog : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class Dialog : MonoBehaviour
     private int index;
 
     public bool isSpeaking;
+    public GameObject continueButton;
 
     public Image char1Icon;
     public Image char2Icon;
@@ -25,13 +27,15 @@ public class Dialog : MonoBehaviour
     public PlayerMovement player;
 
     AudioManager audioManager;
-    public AudioSource audioSource;
-    public AudioClip clip;
+
+    FadeOut fade;
 
     private void Start()
     {
+        continueButton.SetActive(false);
         player = FindAnyObjectByType<PlayerMovement>();
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>(); // Get audio manager
+        fade = FindAnyObjectByType<FadeOut>();
     }
 
     // Update is called once per frame
@@ -39,7 +43,6 @@ public class Dialog : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && isSpeaking)
         {
-            audioSource.Play();
             if (textComponent.text == lines[index])
             {
                 NextLine();
@@ -62,12 +65,6 @@ public class Dialog : MonoBehaviour
         }
     }
 
-    public void PlaySoundEffect()
-    {
-        audioSource.Play();
-        AudioClip clip = audioSource.clip;
-    }
-
     public void ResetDialog()
     {
         audioManager.PlaySFX(audioManager.popSound);
@@ -87,7 +84,7 @@ public class Dialog : MonoBehaviour
     {
         foreach (char c in lines[index].ToCharArray())
         {
-            //audioManager.PlaySFX(audioManager.manGrunt);
+            audioManager.PlaySFX(audioManager.manGrunt);
             textComponent.text += c;
             yield return new WaitForSeconds(textSpeed);
         }
@@ -106,6 +103,29 @@ public class Dialog : MonoBehaviour
             player.inDialog = false;
             isSpeaking = false;
             anim.SetBool("isOpen", false);
+            continueButton.SetActive(true);
         }
+    }
+
+    public void BeginImmunotherapy()
+    {
+        fade.StartFade();
+        Invoke("ImmunotherapyLevel", 5f);
+    }
+
+    void ImmunotherapyLevel()
+    {
+        SceneManager.LoadScene("ImmunotherapyMiniGame");
+    }
+
+    public void BeginScanner()
+    {
+        fade.StartFade();
+        Invoke("ScannerLevel", 5f);
+    }
+
+    void ScannerLevel()
+    {
+        SceneManager.LoadScene("ScannerMiniGame");
     }
 }

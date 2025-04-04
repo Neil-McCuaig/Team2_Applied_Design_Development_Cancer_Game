@@ -38,6 +38,9 @@ public class DialogTrigger : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         canSpeak = false;
-        interactText.enabled = false;
+        if (interactText != null)
+        {
+            interactText.enabled = false;
+        }
     }
 }

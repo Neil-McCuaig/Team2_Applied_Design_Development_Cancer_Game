@@ -10,11 +10,15 @@ public class ClickDragging : MonoBehaviour
 
     public BoxCollider2D area;
 
+    public GameObject dialogBox;
     public GameObject tutorialIntro;
+
+    AudioManager audioManager;
 
     void Start()
     {
         orginalPosition = transform.position;
+        audioManager = FindAnyObjectByType<AudioManager>();
     }
 
     void Update()
@@ -39,11 +43,16 @@ public class ClickDragging : MonoBehaviour
         dragging = true;
 
         tutorialIntro.SetActive(false);
+        dialogBox.SetActive(true);
+
+        audioManager.PlaySFX(audioManager.Xray);
     }
 
     private void OnMouseUp() 
     {
         dragging = false;
         transform.position = orginalPosition;
+
+        audioManager.StopMusic();
     }
 }

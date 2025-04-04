@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Level1.unity
     guid: 44dc6e8a644b82749962e5d4bae83b5b
   - enabled: 1
+    path: Assets/Scenes/Level2.unity
+    guid: e7fd06edddcfba3438bd93f0f5ec0fbd
+  - enabled: 1
     path: Assets/Scenes/ScannerMiniGame.unity
     guid: 04d5cdb73bb4b1e488e97427bf58f8e2
   - enabled: 1
