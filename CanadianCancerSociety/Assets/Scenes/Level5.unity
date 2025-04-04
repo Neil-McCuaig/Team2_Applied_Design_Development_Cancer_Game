@@ -838,7 +838,7 @@ MonoBehaviour:
   - "(Muhammed) \nThank you so much!"
   textSpeed: 0.05
   isSpeaking: 1
-  continueButton: {fileID: 1342318819}
+  continueButton: {fileID: 0}
   char1Icon: {fileID: 69778459}
   char2Icon: {fileID: 1900825463}
   anim: {fileID: 498371807}
@@ -1568,11 +1568,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94a72223b39a7da4aa66cc9c3bbe5d91, type: 3}
---- !u!1 &1342318819 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5513617962938080117, guid: a74e6e0c183fa8843a6272b039273ab2, type: 3}
-  m_PrefabInstance: {fileID: 9047874470229809247}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1558574146
 GameObject:
   m_ObjectHideFlags: 0
