@@ -8,6 +8,7 @@ public class ScalpelController : MonoBehaviour
 
     public GameObject redCurser;
     public GameObject bloodParticle;
+    AudioManager audioManager;
     public AudioSource audioSource;
     public AudioClip clip;
 
@@ -33,13 +34,14 @@ public class ScalpelController : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
+            
             anim.SetBool("isPressing", true);
             redCurser.SetActive(false);
             bloodParticle.SetActive(true);
-            audioSource.Play();
         }
         else
         {
+            audioSource.Play();
             anim.SetBool("isPressing", false);
             redCurser.SetActive(true);
             bloodParticle.SetActive(false);
