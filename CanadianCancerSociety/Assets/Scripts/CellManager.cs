@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CellManager : MonoBehaviour
 {
@@ -36,11 +37,9 @@ public class CellManager : MonoBehaviour
     public float cancerAttackMaxCooldown = 0.7f;
     public float cancerAttackIncreaseRate = 0.1f;
 
-    public int score = 0;
     public TextMeshProUGUI scoreText;
-    
-    public Transform spawnPoint1;
-    public Transform spawnPoint2;
+
+    public Transform[] cancerSpawnPoints;
     public int numOfWaves;
     public float spawnInterval = 2f; 
     public float waveInterval = 7f;
@@ -68,6 +67,9 @@ public class CellManager : MonoBehaviour
     public GameObject loseScreen;
     MiniGameDialog dialog;
 
+    AudioManager audioManager;
+    FadeOut fade;
+
     void Start()
     {
         waveText.text = "Wave: " + currentWave + "/8";
@@ -91,14 +93,17 @@ public class CellManager : MonoBehaviour
         // Start spawning objects in a coroutine
         StartCoroutine(SpawnWaves());
         StartCoroutine(SpawnPickUp());
+
+        audioManager = FindAnyObjectByType<AudioManager>();
+        fade = FindAnyObjectByType<FadeOut>();
     }
     IEnumerator SpawnWaves()
     {
         // Continuously spawn objects at intervals
         while (numOfWaves > 0)
         {
-            // Alternate spawn point
-            Transform currentSpawnPoint = useSpawnPoint1 ? spawnPoint1 : spawnPoint2;
+            // Randomly pick a spawn point from the list of spawn points
+            Transform currentSpawnPoint = cancerSpawnPoints[Random.Range(0, cancerSpawnPoints.Length)];
 
             // Instantiate each object in the list at the current spawn point
             for (int i = 0; i < cancerCellCount; i++)
@@ -226,6 +231,7 @@ public class CellManager : MonoBehaviour
 
     public void PickupFunction(Transform pickupPosition)
     {
+        audioManager.PlaySFX(audioManager.popSound);
         immuneCellSpeed += immuneSpeedIncreaseRate;
         if (immuneCellSpeed > immuneCellMaxSpeed)
         {
@@ -267,10 +273,10 @@ public class CellManager : MonoBehaviour
                     // Only spawn a new cancer cell if allowed
                     if (canSpawnCancerCell)
                     {
+                        audioManager.PlaySFX(audioManager.hurt);
                         // Turn healthy cell into cancer cell
                         healthyCells.Remove(targetHealthyCell);  // Remove the healthy cell from the list
                         Destroy(targetHealthyCell);
-                        score -= 10;
                         UpdateUI();
                         GameObject newCell = Instantiate(cancerCellPrefab, cancerCell.transform.position, Quaternion.identity);
                         cancerCells.Add(newCell);
@@ -298,11 +304,11 @@ public class CellManager : MonoBehaviour
             {
                 if (Vector2.Distance(immuneCell.transform.position, cancerCell.transform.position) < immuneAttackRange)
                 {
-                    score += 100;
                     UpdateUI();
                     // Destroy cancer cell (immune cell attacks)
                     Destroy(cancerCell);
                     cancerCells.Remove(cancerCell);
+                    audioManager.PlaySFX(audioManager.hurtMale);
                     break;
                 }
             }
@@ -357,6 +363,26 @@ public class CellManager : MonoBehaviour
 
     void UpdateUI()
     {
-        scoreText.text = "Score: " + score;
+        scoreText.text = "Cells Remaining: " + healthyCells.Count;
+    }
+
+    public void NextLevel()
+    {
+        fade.StartFade();
+        Invoke("LoadNext", 5f);
+    }
+    public void RestartLevel()
+    {
+        fade.StartFade();
+        Invoke("ReloadScene", 5f);
+    }
+    void ReloadScene()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentSceneIndex);
+    }
+    void LoadNext()
+    {
+        SceneManager.LoadScene("Level3");
     }
 }

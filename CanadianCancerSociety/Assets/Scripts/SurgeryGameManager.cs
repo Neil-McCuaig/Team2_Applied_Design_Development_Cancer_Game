@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
 
 public class SurgeryGameManager : MonoBehaviour
@@ -10,19 +11,28 @@ public class SurgeryGameManager : MonoBehaviour
     public int surgeryProcess;
     public bool surgeryFinished = false;
 
-    public float surgeryScore = 1500f;
+    public int tumorStruck = 4;
     public TextMeshProUGUI scoreText;
 
     MiniGameDialog dialog;
     public GameObject winScreen;
+    public GameObject loseScreen;
+    bool hasLost = false;
 
     public TextMeshProUGUI timerText;
     private float currentTime = 0;
 
+    public Animator anim;
+    AudioManager audioManager;
+    FadeOut fade;
+
     void Start()
     {
         dialog = FindAnyObjectByType<MiniGameDialog>();
+        audioManager = FindAnyObjectByType<AudioManager>();
+        fade = FindAnyObjectByType<FadeOut>();
         winScreen.SetActive(false);
+        loseScreen.SetActive(false);
     }
 
     // Update is called once per frame
@@ -33,8 +43,26 @@ public class SurgeryGameManager : MonoBehaviour
         int seconds = Mathf.FloorToInt(currentTime % 60);
         timerText.text = ("Time: " + string.Format("{0:00}:{1:00}", minutes, seconds));
 
-        scoreText.text = "Score: " + surgeryScore;
+        scoreText.text = "Mistakes Remaining: " + tumorStruck;
         TrackPositiveBoolObjects();
+
+        if(tumorStruck == 3)
+        {
+            anim.SetInteger("Health", 1);
+        }
+        else if (tumorStruck == 2)
+        {
+            anim.SetInteger("Health", 2);
+        }
+        else if (tumorStruck == 1)
+        {
+            anim.SetInteger("Health", 3);
+        }
+        else if (tumorStruck == 0)
+        {
+            loseScreen.SetActive(true);
+            hasLost = true;
+        }
     }
 
     void TrackPositiveBoolObjects()
@@ -49,7 +77,7 @@ public class SurgeryGameManager : MonoBehaviour
         foreach (var obj in allObjects)
         {
             ClickableObject clickable = obj.GetComponent<ClickableObject>();
-            if (clickable != null && clickable.isClicked)
+            if (clickable != null && clickable.isClicked && !hasLost)
             {
                 // If the bool is true, add this object to the tracked list
                 trackedObjects.Add(obj);
@@ -72,35 +100,48 @@ public class SurgeryGameManager : MonoBehaviour
         if (surgeryProcess == 10)
         {
             dialog.TriggerDialog();
+            audioManager.PlaySFX(audioManager.popSound);
         }
         else if (surgeryProcess == 20)
         {
             dialog.TriggerDialog();
+            audioManager.PlaySFX(audioManager.popSound);
         }
         else if (surgeryProcess == 30)
         {
             dialog.TriggerDialog();
+            audioManager.PlaySFX(audioManager.popSound);
         }
         else if (surgeryProcess == 40)
         {
             dialog.TriggerDialog();
+            audioManager.PlaySFX(audioManager.popSound);
         }
         else if (surgeryProcess == 50)
         {
             dialog.TriggerDialog();
+            audioManager.PlaySFX(audioManager.popSound);
         }
         else if (surgeryProcess == 60)
         {
             dialog.TriggerDialog();
+            audioManager.PlaySFX(audioManager.popSound);
         }
     }
 
-    public void IncreaseScore(float increaseAmount)
+    public void DecreaseScore()
     {
-        surgeryScore += increaseAmount;
+        tumorStruck -= 1;
+        audioManager.PlaySFX(audioManager.hurt);
     }
-    public void DecreaseScore(float decreaseAmount)
+
+    public void NextLevel()
     {
-        surgeryScore -= decreaseAmount;
+        fade.StartFade();
+        Invoke("LoadNextLevel", 5f);
+    }
+    void LoadNextLevel()
+    {
+        SceneManager.LoadScene("Level5");
     }
 }

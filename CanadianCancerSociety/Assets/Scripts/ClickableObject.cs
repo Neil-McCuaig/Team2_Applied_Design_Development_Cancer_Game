@@ -9,6 +9,8 @@ public class ClickableObject : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     SurgeryGameManager gameManager;
 
+
+
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -21,7 +23,6 @@ public class ClickableObject : MonoBehaviour
         {
             if (!isClicked) 
             {
-                gameManager.IncreaseScore(10f);
                 gameManager.CallForDialog();
             }
             // Toggle the bool when the object is clicked

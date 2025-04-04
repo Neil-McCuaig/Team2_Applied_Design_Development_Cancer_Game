@@ -18,6 +18,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip walking;
     public AudioClip Xray;
     public AudioClip incorrect;
+    public AudioClip hurt;
+    public AudioClip hurtMale;
 
 
     private void Awake()

@@ -128,4 +128,37 @@ public class Dialog : MonoBehaviour
     {
         SceneManager.LoadScene("ScannerMiniGame");
     }
+
+    public void BeginNextPatient()
+    {
+        fade.StartFade();
+        Invoke("NextPatient", 5f);
+    }
+
+    void NextPatient()
+    {
+        SceneManager.LoadScene("Level4");
+    }
+
+    public void BeginSurgery()
+    {
+        fade.StartFade();
+        Invoke("SurgeryLevel", 5f);
+    }
+
+    void SurgeryLevel()
+    {
+        SceneManager.LoadScene("SurgeryMiniGame");
+    }
+
+    public void BeginDemoEnd()
+    {
+        fade.StartFade();
+        Invoke("DemoEndLevel", 5f);
+    }
+
+    void DemoEndLevel()
+    {
+        SceneManager.LoadScene("EndOfDemo");
+    }
 }
