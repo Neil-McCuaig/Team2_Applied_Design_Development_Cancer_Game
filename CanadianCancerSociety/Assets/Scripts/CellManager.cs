@@ -10,6 +10,9 @@ public class CellManager : MonoBehaviour
     public GameObject healthyCellPrefab;
     public GameObject cancerCellPrefab;
     public GameObject immuneCellPrefab;
+    public AudioSource audioSource;
+    public AudioSource audioSource2;
+    public AudioSource audioSource3;
 
     public int healthyCellCount = 10;
     public int cancerCellCount = 1;
@@ -270,6 +273,7 @@ public class CellManager : MonoBehaviour
                         // Turn healthy cell into cancer cell
                         healthyCells.Remove(targetHealthyCell);  // Remove the healthy cell from the list
                         Destroy(targetHealthyCell);
+                        audioSource.Play(); //negative audio feedback
                         score -= 10;
                         UpdateUI();
                         GameObject newCell = Instantiate(cancerCellPrefab, cancerCell.transform.position, Quaternion.identity);
@@ -298,6 +302,7 @@ public class CellManager : MonoBehaviour
             {
                 if (Vector2.Distance(immuneCell.transform.position, cancerCell.transform.position) < immuneAttackRange)
                 {
+                    audioSource2.Play(); //positive audio feedback
                     score += 100;
                     UpdateUI();
                     // Destroy cancer cell (immune cell attacks)
