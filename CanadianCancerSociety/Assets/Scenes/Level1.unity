@@ -658,7 +658,7 @@ MonoBehaviour:
   SFXSource: {fileID: 637908696}
   SFXSourceTwo: {fileID: 1811110944}
   SFXSourceThree: {fileID: 0}
-  backgroundMusic: {fileID: 8300000, guid: d3e261e59f0d076478ae80946079a24d, type: 3}
+  backgroundMusic: {fileID: 8300000, guid: 56c8a8bc17780e341af3236f73f3d203, type: 3}
   popSound: {fileID: 8300000, guid: 9421f91be466aed4ba31b7f6762f9b9f, type: 3}
   manGrunt: {fileID: 8300000, guid: 70df257ee0cbbe9408983c5aaebac75a, type: 3}
   penLong: {fileID: 8300000, guid: 78989b5241e265043af78965d86578aa, type: 3}
@@ -1286,7 +1286,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: cf47f61dea0fd0544b034c7a8c21f55e, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.51
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1636,9 +1636,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 56c8a8bc17780e341af3236f73f3d203, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.118
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -2841,7 +2841,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 78989b5241e265043af78965d86578aa, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
