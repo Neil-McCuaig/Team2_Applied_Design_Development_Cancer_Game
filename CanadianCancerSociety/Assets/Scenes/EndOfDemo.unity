@@ -271,7 +271,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Providing Support For:
+  m_text: 'Serving the goals of:
 
     Canadian Cancer Society'
   m_isRightToLeft: 0
