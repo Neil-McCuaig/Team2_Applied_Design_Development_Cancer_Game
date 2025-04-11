@@ -271,7 +271,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Game Client:
+  m_text: 'Providing Support For:
 
     Canadian Cancer Society'
   m_isRightToLeft: 0
@@ -1279,7 +1279,7 @@ MonoBehaviour:
   m_text: 'End of game Demo
 
 
-    Thank you for participating in the alpha test of
+    Thank you for participating in the beta test of
     our demo! The aim of this project is to support individuals and their loved ones
     in coping with cancer by offering easy-to-understand information. Our target
     audience is young teens (ages 9-14), particularly those who may not fully grasp
